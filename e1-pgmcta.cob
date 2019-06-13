@@ -57,8 +57,16 @@
                 10 ws-mun-cte pic X(30).
                 10 ws-edo-cte pic X(30).
                 10 ws-pais-cte pic X(30).
+        01 ws-movimientos.
+            05 ws-no-mts-mts pic 9(13).
+            05 ws-no-cte-mts pic 9(10).
+            05 ws-cta-chq-mts pic 9(13).
+            05 ws-cta-cbe-mts pic 9(20).
+            05 ws-tipo-mts pic A(8).
+            05 ws-sdo-mts pic S9(10)V99.
+            05 ws-fech-mts pic 9(8).
         procedure division.
-        inicio.
+        inicio-reg.
             open output clientes-output-file
             perform 1 times
                 perform limpiar-pantalla
