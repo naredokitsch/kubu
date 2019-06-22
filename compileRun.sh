@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cobc -free -x -o main$1 $1 && ./main$1
+cobc -free -x -o main$1 $1.cob && ./main$1
