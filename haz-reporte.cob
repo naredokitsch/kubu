@@ -19,6 +19,9 @@
             05 e1-fech-mts pic 9(8).
         working-storage section.
         77 fin-fichero pic 9 value 0.
+        77 current-client pic 9(3) value 1.
+        77 current-client-balance pic S9(10)V99 value 0.
+        77 total-clients-balance pic S9(12)V99 value 0.
         01 ws-movimientos.
             05 ws-no-mts-mts pic 9(13).
             05 ws-no-cte-mts pic 9(10).
@@ -29,10 +32,8 @@
             05 ws-fech-mts pic 9(8).
         procedure division.
         inicio-reporte.
-            perform 1 times
-                perform limpiar-pantalla
-                perform leer-movimientos
-            end-perform
+            perform limpiar-pantalla
+            perform leer-movimientos
             close movimientos-file
             stop run.
         limpiar-pantalla.
@@ -45,6 +46,16 @@
                     at end move 1 to fin-fichero
                     not at end perform leer-registro
                 end-read
-            end-perform.
+            end-perform
+            add current-client-balance to total-clients-balance
+            display "El cliente " current-client " tiene un saldo de " current-client-balance.
+            display "Saldo total de clientes: " total-clients-balance.
         leer-registro.
-               display e1-movimientos.
+            move e1-movimientos to ws-movimientos
+            if current-client not = ws-no-cte-mts then
+                display "El cliente " current-client " tiene un saldo de " current-client-balance
+                add current-client-balance to total-clients-balance
+                add 1 to current-client
+                move 0 to current-client-balance
+           end-if
+           add ws-sdo-mts to current-client-balance.

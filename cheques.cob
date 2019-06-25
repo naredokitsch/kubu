@@ -19,6 +19,7 @@
             05 e1-fech-mts pic 9(8).
         working-storage section.
         77 fin-fichero pic 9 value 0.
+        77 inv-ws-sdo-mts pic S9(10)V99.
         01 ws-movimientos.
             05 ws-no-mts-mts pic 9(13).
             05 ws-no-cte-mts pic 9(10).
@@ -52,6 +53,10 @@
             accept ws-sdo-mts
             display "Fecha movimiento(ddmmaaaa): "with no advancing
             accept ws-fech-mts
+            if ws-tipo-mts = "RETIRO  " then
+                 subtract ws-sdo-mts from 0 giving inv-ws-sdo-mts
+                 move inv-ws-sdo-mts to ws-sdo-mts
+            end-if
             move ws-movimientos to e1-movimientos
             write e1-movimientos.
         limpiar-pantalla.
@@ -67,4 +72,5 @@
                 end-read
             end-perform.
         leer-registro.
+            display e1-sdo-mts
             display e1-movimientos.
