@@ -45,7 +45,7 @@
             display "Numero de cuenta(13): "with no advancing
             accept ws-cta-chq-mts
             display "CLABE(20): "with no advancing
-            accept ws-cta-cbe-mts           
+            accept ws-cta-cbe-mts
             display "Tipo de movimiento A(8): "with no advancing
             accept ws-tipo-mts
             display "Monto movimiento S9(10)V99: "with no advancing
